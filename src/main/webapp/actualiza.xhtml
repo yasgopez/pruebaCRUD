@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+      <p:outputLabel value="Personas" style="font-weight:bold; align-content:center" />
+     </h:head>
+    <h:body>
+          <h:form id="form">
+            <div style="padding:15px;">
+              
+                <div style="padding:10px;">
+                 <p:outputLabel value="Nombres: " style="font-weight:bold;"/>
+                 <p:inputText value="#{createperson.mipersona.nombres}"  style="width:25%"/>
+                  <p:spacer width="30"/>
+                 <p:outputLabel value="Apellidos: " style="font-weight:bold;"/>
+                 <p:inputText value="#{createperson.mipersona.apellidos}" style="width:25%"/>
+                </div> 
+                 <div style="padding:10px;">
+                  <p:outputLabel value="Tipo Documento: " style="font-weight:bold;"/>
+                  <p:selectOneMenu value="#{createperson.tipodocu}">
+                  <f:selectItem itemLabel="Tipo documento" itemValue="null"/>
+                  <f:selectItems value="#{createperson.documentostipo}" var="c" itemLabel="#{c.nomdoc}" itemValue="#{c.iddoc}"/>
+                  </p:selectOneMenu>                  
+                  <p:spacer width="30"/>
+                 <p:outputLabel value="Numero Documento: " style="font-weight:bold;"/>
+                 <p:inputText value="#{createperson.mipersona.numeroDocumento}"   style="width:25%"/>
+             </div> 
+
+                
+                <div style="padding:10px;">
+                  <p:calendar  value="#{createperson.mipersona.fechaDeNacimiento}" locale="es" pattern="dd/MM/yyyy">
+                    <p:ajax event="dateSelect" listener="#{managedBeanDatos.actualizar_fecha}" update=":form:fecha_seleccioanda"/> 
+                   </p:calendar>
+                </div> 
+                             
+                <h:outputText id="fecha_seleccioanda" value="#{managedBeanDatos.f_seleccionada}"/>
+                                    
+               <div style="padding:10px;">  
+                <p:spacer width="50"/>
+                 <br></br> 
+                <h:commandButton value="Guardar" action="#{createperson.agregarpersona()}"    style="width:15%"/>
+                <br></br> 
+               </div> 
+                         
+             
+               </div>        
+        </h:form>  
+    </h:body>
+</html>
+
